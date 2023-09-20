@@ -1,0 +1,18 @@
+{
+	"name": "dotvuserscripts",
+	"version": "1.0.0",
+	"description": "",
+	"main": "main.meta.js",
+	"scripts": {
+		"build": "webpack"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"glob": "^10.3.4",
+		"web": "^0.0.2",
+		"webpack-cli": "^5.1.4",
+		"webpack-dev-server": "^4.15.1"
+	}
+}

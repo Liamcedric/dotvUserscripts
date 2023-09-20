@@ -1,4 +1,3 @@
-"use strict";
 
 const setupObserver = new MutationObserver((mutations) => {
 	const addedNode = mutations.find(
@@ -17,4 +16,3 @@ const setupObserver = new MutationObserver((mutations) => {
 setupObserver.observe(document.body, { childList: true, subtree: true });
 
 function main() {
-	console.log("started");
