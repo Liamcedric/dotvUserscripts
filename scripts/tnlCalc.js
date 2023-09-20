@@ -56,9 +56,6 @@ function update() {
 	resourcesRequired = parseInt(resources.xp / 1.45);
 
 	minutesTNL = (resourcesRequired - totalResources) / xpPerMin;
-	console.log("reqired RSC " + resourcesRequired);
-	console.log("exp per min " + xpPerMin);
-	console.log("total RSC " + totalResources);
 	hours = Math.floor(minutesTNL / 60);
 	remainingMinutes = minutesTNL % 60;
 	timestr = "";
