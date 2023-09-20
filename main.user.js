@@ -12,4 +12,5 @@
 // @require      https://raw.githubusercontent.com/MattiasKDev/dotvUserscripts/main/dist/scriptBundle.js
 // @require      https://raw.githubusercontent.com/MattiasKDev/dotvUserscripts/main/setup/tail.js
 // @grant        none
+// @license      MIT
 // ==/UserScript==
