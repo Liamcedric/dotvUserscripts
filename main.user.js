@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         LocalTest
+// @name         dotvUserscripts
 // @namespace    https://github.com/MattiasKDev/dotvUserscripts
 // @version      0.1
-// @description  A brief summary to describe the script
+// @description  a collection of dotv userscripts
 // @author       infinity
 // @match        https://play.dragonsofthevoid.com/*
 // @exclude      https://play.dragonsofthevoid.com/#/login
