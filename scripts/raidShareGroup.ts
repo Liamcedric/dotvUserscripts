@@ -25,13 +25,18 @@ function addButton(): void {
 	const buttonsContainer = document.querySelector(
 		"#game-view > div > div.dotv-container.router-container > div:nth-child(6) > div > div:nth-child(6)"
 	);
-	
-	const newButton = buttonsContainer?.lastChild?.cloneNode(true) as Element;
-	newButton.querySelector("h4").textContent = "test";
 
+	const newButton = buttonsContainer?.lastChild?.cloneNode(true) as Element;
+	const f = newButton.firstChild as HTMLElement;
+	f.classList.add("inactive");
+
+	const buttonText = (newButton.querySelector("h4").textContent = "test");
+
+	//set buttons active status
 	newButton.addEventListener("click", () => {
 		const f = newButton.firstChild as HTMLElement;
 		f.classList.remove("inactive");
+		window.history.pushState({}, "", `#/${buttonText}-raid`);
 
 		const buttons = Array.from(buttonsContainer.childNodes) as HTMLElement[];
 		buttons.slice(0, -1).forEach((element: HTMLElement) => {
@@ -39,7 +44,6 @@ function addButton(): void {
 			f.classList.add("inactive");
 		});
 	});
-
 	const buttons = Array.from(buttonsContainer.childNodes) as HTMLElement[];
 	buttons.slice(0, -1).forEach((element: HTMLElement) => {
 		element.addEventListener("click", () => {
