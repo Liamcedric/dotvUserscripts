@@ -9,6 +9,7 @@ module.exports = {
 		filename: "scriptBundle.js",
 	},
 	watch: true,
+	cache: true,
 	module: {
 		rules: [{ test: /\.ts$/, use: "ts-loader" }],
 	},
