@@ -4,20 +4,57 @@
  * Description: Displays sp and levels gained since last reset.
  */
 
-(async function () {
+//set up local storage for first time use
+if (localStorage.getItem("dailyStats") === null) {
+	const newStats = {
+		lastUpdated: "2021-01-01",
+		spVal: 0,
+		lvl: 0,
+	};
+	localStorage.setItem("dailyStats", JSON.stringify(newStats));
+}
+
+setupEventListeners();
+
+async function setupEventListeners() {
+	let tooltip = null;
+	const avatar = document.getElementsByClassName("avatar")[0].firstChild;
+	avatar.addEventListener("mouseover", () => {
+		tooltip = document.createElement("div");
+		tooltip.innerText = "Loading...";
+		tooltip.style.position = "absolute";
+		tooltip.style.backgroundColor = "black";
+		tooltip.style.color = "white";
+		tooltip.style.padding = "4px";
+		tooltip.style.borderRadius = "4px";
+		tooltip.style.zIndex = "9999";
+		const avatarRect = avatar.getBoundingClientRect();
+		tooltip.style.left = `${avatarRect.left + window.scrollX}px`;
+		tooltip.style.top = `${avatarRect.top + window.scrollY}px`;
+
+		tooltip.style.pointerEvents = "none";
+		document.body.appendChild(tooltip);
+
+		getDailyStatChange()
+			.then((result) => {
+				tooltip.innerText = result;
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	});
+	avatar.addEventListener("mouseout", () => {
+		if (tooltip) {
+			tooltip.remove();
+			tooltip = null;
+		}
+	});
+}
+
+async function getDailyStatChange() {
 	const data = await getUserData();
 	const stats = getStatsFromData(data);
 	const sp = calcSpValue(stats);
-
-	//set up local storage
-	if (localStorage.getItem("dailyStats") === null) {
-		const newStats = {
-			lastUpdated: "2021-01-01",
-			spVal: 0,
-			lvl: 0,
-		};
-		localStorage.setItem("dailyStats", JSON.stringify(newStats));
-	}
 
 	//get yesterday's stats
 	yesterdayStats = JSON.parse(localStorage.getItem("dailyStats"));
@@ -36,12 +73,10 @@
 		localStorage.setItem("dailyStats", JSON.stringify(newStats));
 	}
 
-	console.log(
-		`sp gained: ${sp - yesterdayStats.spVal}, level gained: ${
-			stats.level - yesterdayStats.lvl
-		}`
-	);
-})();
+	return `sp gained: ${sp - yesterdayStats.spVal}\nlevel gained: ${
+		stats.level - yesterdayStats.lvl
+	}`;
+}
 
 async function getUserData() {
 	const rawData = await fetch(
@@ -52,10 +87,11 @@ async function getUserData() {
 		}
 	);
 	const data = await rawData.json();
-	return data.payload.user;
+	return data.payload;
 }
 
 function getStatsFromData(data) {
+	const spOnHand = data.inventory.items["p.stats"].qty;
 	let stats = {
 		constitution: 0,
 		strength: 0,
@@ -70,9 +106,12 @@ function getStatsFromData(data) {
 	};
 
 	let filteredStats = Object.fromEntries(
-		Object.entries(data).filter(([key, value]) => stats.hasOwnProperty(key))
+		Object.entries(data.user).filter(([key, value]) =>
+			stats.hasOwnProperty(key)
+		)
 	);
 
+	filteredStats.sp = spOnHand;
 	return filteredStats;
 }
 
