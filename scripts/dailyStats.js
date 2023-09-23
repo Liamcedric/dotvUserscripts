@@ -14,6 +14,8 @@ if (localStorage.getItem("dailyStats") === null) {
 	localStorage.setItem("dailyStats", JSON.stringify(newStats));
 }
 
+getDailyStatChange();
+
 setupEventListeners();
 
 async function setupEventListeners() {
