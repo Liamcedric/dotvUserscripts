@@ -4,26 +4,29 @@
  * Description: Displays sp and levels gained since last reset.
  */
 
-//set up local storage for first time use
-if (localStorage.getItem("dailyStats") === null) {
-	const newStats = {
-		lastUpdated: "2021-01-01",
-		spVal: 0,
-		lvl: 0,
-	};
-	localStorage.setItem("dailyStats", JSON.stringify(newStats));
+main();
+let lastResponse;
+async function main() {
+	//set up local storage for first time use
+	if (localStorage.getItem("dailyStats") === null) {
+		const newStats = {
+			lastUpdated: "2021-01-01",
+			spVal: 0,
+			lvl: 0,
+		};
+		localStorage.setItem("dailyStats", JSON.stringify(newStats));
+	}
+
+	lastResponse = await getDailyStatChange();
+	setupEventListeners();
 }
-
-getDailyStatChange();
-
-setupEventListeners();
 
 async function setupEventListeners() {
 	let tooltip = null;
 	const avatar = document.getElementsByClassName("avatar")[0].firstChild;
 	avatar.addEventListener("mouseover", () => {
 		tooltip = document.createElement("div");
-		tooltip.innerText = "Loading...";
+		tooltip.innerText = lastResponse;
 		tooltip.style.position = "absolute";
 		tooltip.style.backgroundColor = "black";
 		tooltip.style.color = "white";
@@ -40,6 +43,7 @@ async function setupEventListeners() {
 		getDailyStatChange()
 			.then((result) => {
 				tooltip.innerText = result;
+				lastResponse = result;
 			})
 			.catch((error) => {
 				console.error(error);
