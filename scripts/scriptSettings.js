@@ -10,6 +10,7 @@ watchForSettingsMenu();
 
 function buildSettingsMenu() {
 	const settingsView = document.getElementById("settings");
+	if (settingsView === null) return;
 
 	const fieldset = document.createElement("fieldset");
 	fieldset.style.borderRadius = "5px";
