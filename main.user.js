@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         dotvUserscripts
 // @namespace    https://github.com/MattiasKDev/dotvUserscripts
-// @version      0.2
+// @version      0.3
 // @description  a collection of dotv userscripts
 // @author       infinity
 // @match        https://play.dragonsofthevoid.com/*
