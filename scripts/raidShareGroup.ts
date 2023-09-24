@@ -1,4 +1,8 @@
-watchForTabChange();
+if (JSON.parse(localStorage.getItem("scriptSettings")).raidShareGroup) main();
+
+function main() {
+	watchForTabChange();
+}
 
 function watchForTabChange(): void {
 	const tabObserver = new MutationObserver((mutations) => {
