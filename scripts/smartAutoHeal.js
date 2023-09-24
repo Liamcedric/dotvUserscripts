@@ -4,7 +4,7 @@
  * Description: Automatically uses hp pots for you.
  */
 
-if (JSON.parse(localStorage.getItem("scriptSettings")).smartAutoHeal) main();
+if (JSON.parse(localStorage.getItem("scriptSettings"))?.smartAutoHeal) main();
 
 function main() {
 	usePotWithCooldown();

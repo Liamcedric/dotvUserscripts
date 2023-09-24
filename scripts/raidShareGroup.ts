@@ -1,4 +1,4 @@
-if (JSON.parse(localStorage.getItem("scriptSettings")).raidShareGroup) main();
+if (JSON.parse(localStorage.getItem("scriptSettings"))?.raidShareGroup) main();
 
 function main() {
 	watchForTabChange();

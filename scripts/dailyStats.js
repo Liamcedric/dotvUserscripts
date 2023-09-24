@@ -4,7 +4,7 @@
  * Description: Displays sp and levels gained since last reset.
  */
 
-if (JSON.parse(localStorage.getItem("scriptSettings")).dailyStats) main();
+if (JSON.parse(localStorage.getItem("scriptSettings"))?.dailyStats) main();
 
 let lastResponse;
 async function main() {
