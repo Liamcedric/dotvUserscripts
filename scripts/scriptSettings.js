@@ -1,3 +1,9 @@
+/**
+ * Author: infinity
+ * Name: Script Settings
+ * Description: Allows the user to enable/disable scripts from a settings menu.
+ */
+
 settings = getSettings();
 
 watchForSettingsMenu();
