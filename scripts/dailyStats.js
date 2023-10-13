@@ -71,7 +71,7 @@ async function getDailyStatChange() {
 	const currentUTCDate = `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
 
 	//if the current date is greater than the last updated date, update the stored stats
-	if (currentUTCDate > yesterdayStats.lastUpdated) {
+	if (Date.parse(currentUTCDate) > Date.parse(yesterdayStats.lastUpdated)) {
 		const newStats = {
 			lastUpdated: currentUTCDate,
 			spVal: sp,
