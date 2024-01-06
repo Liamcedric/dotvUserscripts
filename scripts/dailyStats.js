@@ -66,14 +66,10 @@ async function getDailyStatChange() {
 	//get yesterday's stats
 	yesterdayStats = JSON.parse(localStorage.getItem("dailyStats"));
 
-	//build the current date in UTC. JS SUCKS
-	const d = new Date();
-	const currentUTCDate = `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
-
 	//if the current date is greater than the last updated date, update the stored stats
-	if (Date.parse(currentUTCDate) > Date.parse(yesterdayStats.lastUpdated)) {
+	if (new Date() > new Date(yesterdayStats.lastUpdated)) {
 		const newStats = {
-			lastUpdated: currentUTCDate,
+			lastUpdated: new Date().toISOString().split("T")[0],
 			spVal: sp,
 			lvl: stats.level,
 		};
