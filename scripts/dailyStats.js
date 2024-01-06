@@ -66,10 +66,13 @@ async function getDailyStatChange() {
 	//get yesterday's stats
 	yesterdayStats = JSON.parse(localStorage.getItem("dailyStats"));
 
+	//current utc date
+	const today = new Date().toISOString().split("T")[0];
+
 	//if the current date is greater than the last updated date, update the stored stats
-	if (new Date() > new Date(yesterdayStats.lastUpdated)) {
+	if (new Date(today) > new Date(yesterdayStats.lastUpdated)) {
 		const newStats = {
-			lastUpdated: new Date().toISOString().split("T")[0],
+			lastUpdated: today,
 			spVal: sp,
 			lvl: stats.level,
 		};
