@@ -75,6 +75,7 @@ function getSettings() {
 	if (localStorage.getItem("scriptSettings") === null) {
 		scripts = {
 			smartAutoHeal: false,
+			smartLesserGrit: false,
 			dailyStats: false,
 			raidShareGroup: false,
 		};
